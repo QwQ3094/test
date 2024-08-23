@@ -15,19 +15,11 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           title: 'Flutter Demo',
           theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(
-              seedColor: Colors.deepPurple,
-              primary: lightDynamic?.primary ?? Colors.deepPurple,
-              secondary: lightDynamic?.secondary ?? Colors.deepOrange,
-            ),
+            colorScheme: lightColorScheme ?? _defaultLightColorScheme,
             useMaterial3: true,
-          ),
-          darkTheme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(
-              seedColor: Colors.deepPurple,
-              primary: darkDynamic?.primary ?? Colors.deepPurple,
-              secondary: darkDynamic?.secondary ?? Colors.deepOrange,
             ),
+          darkTheme: ThemeData(
+            colorScheme: darkColorScheme ?? _defaultDarkColorScheme,
             useMaterial3: true,
           ),
           themeMode: ThemeMode.system, // or ThemeMode.light/dark based on your preference
