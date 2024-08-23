@@ -12,23 +12,22 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return DynamicColorBuilder(
       builder: (lightDynamic, darkDynamic) {
+        final lightColorScheme = lightDynamic ?? ColorScheme.fromSeed(
+          seedColor: Colors.deepPurple,
+        );
+        final darkColorScheme = darkDynamic ?? ColorScheme.fromSeed(
+          seedColor: Colors.deepPurple,
+          brightness: Brightness.dark,
+        );
+
         return MaterialApp(
           title: 'Flutter Demo',
           theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(
-              seedColor: Colors.deepPurple,
-              primary: lightDynamic?.primary ?? Colors.deepPurple,
-              secondary: lightDynamic?.secondary ?? Colors.deepOrange,
-            ),
+            colorScheme: lightColorScheme,
             useMaterial3: true,
           ),
           darkTheme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(
-              seedColor: Colors.deepPurple,
-              primary: darkDynamic?.primary ?? Colors.deepPurple,
-              secondary: darkDynamic?.secondary ?? Colors.deepOrange,
-              brightness: Brightness.dark,
-            ),
+            colorScheme: darkColorScheme,
             useMaterial3: true,
           ),
           themeMode: ThemeMode.system, // or ThemeMode.light/dark based on your preference
