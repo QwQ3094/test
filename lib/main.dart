@@ -143,9 +143,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ],
             ),
-            MaterialButton(
+            FilledButton(
               child: const Text('flutter'),
-              onPressed: _incrementCounter,
+              onPressed: () {
+                showTestDialog(context, () {
+                  print("Test");
+                });
+              },
             ),
           ],
         ),
@@ -158,6 +162,34 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
+
+void showTestDialog(BuildContext context, VoidCallback onConfirm) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text("Delete Note"),
+        content: Text("Are you sure you want to delete the note? It cannot be restored."),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop(); // Dismiss the dialog
+            },
+            child: Text("Cancel"),
+          ),
+          FilledButton(
+            onPressed: () {
+              onConfirm(); // Perform delete action
+              Navigator.of(context).pop(); // Dismiss the dialog
+            },
+            child: Text("Sure"),
+          ),
+        ],
+      );
+    },
+  );
+}
+
 
 class BusinessScreen extends StatelessWidget {
   const BusinessScreen({super.key});
