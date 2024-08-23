@@ -32,6 +32,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
   bool _isSwitched = false;
+  int _selectedIndex = 1;
 
   void _incrementCounter() {
     setState(() {
@@ -42,6 +43,12 @@ class _MyHomePageState extends State<MyHomePage> {
   void _toggleSwitch(bool value) {
     setState(() {
       _isSwitched = value;
+    });
+  }
+  
+  void _onDestinationSelected(int index) {
+    setState(() {
+      _selectedIndex = index;
     });
   }
 
@@ -84,8 +91,12 @@ class _MyHomePageState extends State<MyHomePage> {
                       onChanged: _toggleSwitch,
                     ),
                   ],
-                )
+                ),
               ],
+            ),
+            MaterialButton(
+              child: const Text('flutter'),
+              onPressed: () {},
             ),
           ],
         ),
@@ -94,6 +105,16 @@ class _MyHomePageState extends State<MyHomePage> {
         onPressed: _incrementCounter,
         tooltip: 'Increment',
         child: const Icon(Icons.add),
+      ),
+      bottomNavigationBar: NavigationBar(
+        destinations: [
+          NavigationDestination(icon: Icon(Icons.home), label: 'Home'),
+          NavigationDestination(icon: Icon(Icons.business), label: 'Business'),
+          NavigationDestination(icon: Icon(Icons.school), label: 'School'),
+        ],
+        selectedIndex: _selectedIndex,
+        onDestinationSelected: _onDestinationSelected,
+        labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
       ),
     );
   }
