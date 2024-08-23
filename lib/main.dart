@@ -31,7 +31,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
-  bool _isSwitched = false; // Initial state for the switch
+  bool _isSwitched = false;
 
   void _incrementCounter() {
     setState(() {
@@ -63,16 +63,28 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
-            const SizedBox(height: 20), // Add some space
+            const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text('Switch is '),
-                Switch(
-                  value: _isSwitched,
-                  onChanged: _toggleSwitch,
-                ),
-                Text(_isSwitched ? 'ON' : 'OFF'),
+                Text('Switch is ${_isSwitched ? 'ON ' : 'OFF'}'),
+                const SizedBox(width: 10),
+                Column(
+                  children: [
+                    Switch(
+                      value: _isSwitched,
+                      onChanged: _toggleSwitch,
+                    ),
+                    Switch(
+                      value: _isSwitched,
+                      onChanged: _toggleSwitch,
+                    ),
+                    Switch(
+                      value: _isSwitched,
+                      onChanged: _toggleSwitch,
+                    ),
+                  ],
+                )
               ],
             ),
           ],
