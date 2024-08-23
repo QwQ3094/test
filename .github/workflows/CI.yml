@@ -62,7 +62,7 @@ jobs:
             KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
 
       - name: flutter build apk
-        run: flutter build apk --debug --target-platform android-arm64
+        run: flutter build apk --release --target-platform android-arm64
         env:
             KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
             KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
@@ -70,9 +70,9 @@ jobs:
 
       - name: 重命名应用
         run: |
-          for file in build/app/outputs/flutter-apk/app-*.apk; do
+          for file in build/app/outputs/flutter-apk/app.apk; do
             if [[ $file =~ app-(.?*)debug.apk ]]; then
-              new_file_name="build/app/outputs/flutter-apk/Test-${BASH_REMATCH[1]}.apk"
+              new_file_name="build/app/outputs/flutter-apk/Test.apk"
               mv "$file" "$new_file_name"
             fi
           done
@@ -82,4 +82,4 @@ jobs:
         with:
           name: Test-CI
           path: |
-            build/app/outputs/flutter-apk/Test-*.apk
+            build/app/outputs/flutter-apk/Test.apk
