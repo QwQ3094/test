@@ -15,11 +15,20 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           title: 'Flutter Demo',
           theme: ThemeData(
-            colorScheme: lightColorScheme ?? _defaultLightColorScheme,
-            useMaterial3: true,
+            colorScheme: ColorScheme.fromSeed(
+              seedColor: Colors.deepPurple,
+              primary: lightDynamic?.primary ?? Colors.deepPurple,
+              secondary: lightDynamic?.secondary ?? Colors.deepOrange,
             ),
+            useMaterial3: true,
+          ),
           darkTheme: ThemeData(
-            colorScheme: darkColorScheme ?? _defaultDarkColorScheme,
+            colorScheme: ColorScheme.fromSeed(
+              seedColor: Colors.deepPurple,
+              primary: darkDynamic?.primary ?? Colors.deepPurple,
+              secondary: darkDynamic?.secondary ?? Colors.deepOrange,
+              brightness: Brightness.dark,
+            ),
             useMaterial3: true,
           ),
           themeMode: ThemeMode.system, // or ThemeMode.light/dark based on your preference
@@ -115,7 +124,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('Switch is ${_isSwitched ? 'ON ' : 'OFF'}'),
+                Text('Switch is ${_isSwitched ? 'ON' : 'OFF'}'),
                 const SizedBox(width: 10),
                 Column(
                   children: [
