@@ -30,22 +30,14 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-  bool _isSwitched = false;
-  int _selectedIndex = 1;
+  int _selectedIndex = 0;
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+  final List<Widget> _pages = [
+    const HomeScreen(),
+    const BusinessScreen(),
+    const SchoolScreen(),
+  ];
 
-  void _toggleSwitch(bool value) {
-    setState(() {
-      _isSwitched = value;
-    });
-  }
-  
   void _onDestinationSelected(int index) {
     setState(() {
       _selectedIndex = index;
@@ -59,13 +51,52 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
+      body: _pages[_selectedIndex],
+      bottomNavigationBar: NavigationBar(
+        destinations: const [
+          NavigationDestination(icon: Icon(Icons.home), label: 'Home'),
+          NavigationDestination(icon: Icon(Icons.business), label: 'Business'),
+          NavigationDestination(icon: Icon(Icons.school), label: 'School'),
+        ],
+        selectedIndex: _selectedIndex,
+        onDestinationSelected: _onDestinationSelected,
+        labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
+      ),
+    );
+  }
+}
+
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  int _counter = 0;
+  bool _isSwitched = false;
+
+  void _incrementCounter() {
+    setState(() {
+      _counter++;
+    });
+  }
+
+  void _toggleSwitch(bool value) {
+    setState(() {
+      _isSwitched = value;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              '你按下按钮这些次:',
-            ),
+            const Text('你按下按钮这些次:'),
             Text(
               '$_counter',
               style: Theme.of(context).textTheme.headlineMedium,
@@ -96,7 +127,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             MaterialButton(
               child: const Text('flutter'),
-              onPressed: () {},
+              onPressed: _incrementCounter,
             ),
           ],
         ),
@@ -106,15 +137,37 @@ class _MyHomePageState extends State<MyHomePage> {
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ),
-      bottomNavigationBar: NavigationBar(
-        destinations: [
-          NavigationDestination(icon: Icon(Icons.home), label: 'Home'),
-          NavigationDestination(icon: Icon(Icons.business), label: 'Business'),
-          NavigationDestination(icon: Icon(Icons.school), label: 'School'),
+    );
+  }
+}
+
+class BusinessScreen extends StatelessWidget {
+  const BusinessScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: const <Widget>[
+          Text('Business Screen'),
         ],
-        selectedIndex: _selectedIndex,
-        onDestinationSelected: _onDestinationSelected,
-        labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
+      ),
+    );
+  }
+}
+
+class SchoolScreen extends StatelessWidget {
+  const SchoolScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: const <Widget>[
+          Text('School Screen'),
+        ],
       ),
     );
   }
