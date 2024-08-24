@@ -60,7 +60,7 @@ class _SchoolScreenState extends State<SchoolScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.fromLTRB(25, 25, 25, 8),
+          padding: const EdgeInsets.fromLTRB(15, 15, 15, 8),
           child: const Text('Select your gender.'),
         ),
         ListTile(
@@ -80,12 +80,12 @@ class _SchoolScreenState extends State<SchoolScreen> {
           title: const Text('female'),
         ),
         Padding(
-          padding: const EdgeInsets.fromLTRB(25, 8, 25, 25),
+          padding: const EdgeInsets.fromLTRB(15, 8, 15, 15),
           child: Text('Your gender is $_select'),
         ),
 
         Padding(
-          padding: const EdgeInsets.fromLTRB(25, 25, 25, 8),
+          padding: const EdgeInsets.fromLTRB(15, 15, 15, 8),
           child: const Text('Checkbox tile'),
         ),
 
