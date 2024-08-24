@@ -23,6 +23,33 @@ class _HomeScreenState extends State<HomeScreen> {
       _isSwitched = value;
     });
   }
+  
+  void showTestDialog(BuildContext context, VoidCallback onConfirm) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Flutter"),
+          content: Text("Welcome to flutter development!!"),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text("Cancel"),
+            ),
+            FilledButton(
+              onPressed: () {
+                onConfirm();
+                Navigator.of(context).pop();
+              },
+              child: Text("Sure"),
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -91,33 +118,6 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-void showTestDialog(BuildContext context, VoidCallback onConfirm) {
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return AlertDialog(
-        title: Text("Flutter"),
-        content: Text("Welcome to flutter development!!"),
-        actions: <Widget>[
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            child: Text("Cancel"),
-          ),
-          FilledButton(
-            onPressed: () {
-              onConfirm();
-              Navigator.of(context).pop();
-            },
-            child: Text("Sure"),
-          ),
-        ],
-      );
-    },
-  );
-}
-
 class BusinessScreen extends StatefulWidget {
   const BusinessScreen({super.key});
 
@@ -134,9 +134,9 @@ class _BusinessScreenState extends State<BusinessScreen> {
     });
   }
 
-  List<Widget> _getData() {
+  List<Widget> _getTiles() {
     List<Widget> list = [];
-    for (var i = 0; i < 20; i++) {
+    for (var i = 0; i < 10; i++) {
       list.add(ListTile(
         leading: Icon(Icons.reply),
         title: Text('标题$i'),
@@ -149,23 +149,77 @@ class _BusinessScreenState extends State<BusinessScreen> {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      children: _getData(),
+      children: _getTiles(),
     );
   }
 }
 
-class SchoolScreen extends StatelessWidget {
+class SchoolScreen extends StatefulWidget {
   const SchoolScreen({super.key});
 
   @override
+  State<SchoolScreen> createState() => _SchoolScreenState();
+}
+
+class _SchoolScreenState extends State<SchoolScreen> {
+  String _select = 'male';
+  bool _isChecked = false;
+
+  void _selectRadio(String? value) {
+    setState(() {
+      _select = value!;
+    });
+  }
+
+  void _toggleChecked(bool? checked) {
+    setState(() {
+      _isChecked = checked!;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: const <Widget>[
-          Text('School Screen'),
-        ],
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.fromLTRB(25, 25, 25, 8),
+          child: const Text('Select your gender.'),
+        ),
+        ListTile(
+          leading: Radio<String>(
+            value: 'male',
+            groupValue: _select,
+            onChanged: _selectRadio,
+          ),
+          title: const Text('male'),
+        ),
+        ListTile(
+          leading: Radio<String>(
+            value: 'female',
+            groupValue: _select,
+            onChanged: _selectRadio,
+          ),
+          title: const Text('female'),
+        ),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(25, 8, 25, 25),
+          child: Text('Your gender is $_select'),
+        ),
+
+        Padding(
+          padding: const EdgeInsets.fromLTRB(25, 25, 25, 8),
+          child: const Text('Checkbox tile'),
+        ),
+
+        ListTile(
+          leading: Checkbox(
+            value: _isChecked,
+            onChanged: _toggleChecked,
+          ),
+          title: const Text('test'),
+        ),
+      ],
     );
   }
 }

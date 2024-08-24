@@ -72,9 +72,18 @@ class _MainState extends State<Main> {
       body: _pages[_selectedIndex],
       bottomNavigationBar: NavigationBar(
         destinations: const [
-          NavigationDestination(icon: Icon(Icons.home), label: 'Home'),
-          NavigationDestination(icon: Icon(Icons.business), label: 'Business'),
-          NavigationDestination(icon: Icon(Icons.school), label: 'School'),
+          NavigationDestination(
+            icon: Icon(Icons.home),
+            label: 'Home'
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.business),
+            label: 'Business'
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.school),
+            label: 'School'
+          ),
         ],
         selectedIndex: _selectedIndex,
         onDestinationSelected: _onDestinationSelected,
