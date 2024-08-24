@@ -24,7 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
   
-  void showTestDialog(BuildContext context, VoidCallback onConfirm) {
+  void _showTestDialog(BuildContext context) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -40,7 +40,6 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             FilledButton(
               onPressed: () {
-                onConfirm();
                 Navigator.of(context).pop();
               },
               child: Text("Sure"),
@@ -90,9 +89,7 @@ class _HomeScreenState extends State<HomeScreen> {
             FilledButton(
               child: const Text('flutter'),
               onPressed: () {
-                showTestDialog(context, () {
-                  print("Test");
-                });
+                _showTestDialog(context);
               },
             ),
             const SizedBox(height: 10),

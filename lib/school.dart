@@ -23,6 +23,37 @@ class _SchoolScreenState extends State<SchoolScreen> {
     });
   }
 
+  void _showFieldDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Dialog'),
+          content: TextField(
+            decoration: InputDecoration(
+              border: OutlineInputBorder(),
+              labelText: 'Text',
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text("Cancel"),
+            ),
+            FilledButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text("Sure"),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -64,6 +95,34 @@ class _SchoolScreenState extends State<SchoolScreen> {
             onChanged: _toggleChecked,
           ),
           title: const Text('test'),
+        ),
+
+        Padding(
+          padding: const EdgeInsets.all(15),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text('Text field'),
+
+              SizedBox(height: 15),
+
+              TextField(
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Text',
+                ),
+              ),
+
+              SizedBox(height: 15),
+
+              FilledButton(
+                child: const Text('dialog'),
+                onPressed: () {
+                  _showFieldDialog(context);
+                }
+              ),
+            ],
+          ),
         ),
       ],
     );
