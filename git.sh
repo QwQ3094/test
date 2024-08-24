@@ -1,6 +1,6 @@
 #!/bin/sh
 
-echo "Commit name: "
+echo "\nCommit name: "
 read name
 
 git add .
