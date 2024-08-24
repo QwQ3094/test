@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'detail.dart';
 
 class BusinessScreen extends StatefulWidget {
   const BusinessScreen({super.key});
@@ -16,6 +17,14 @@ class _BusinessScreenState extends State<BusinessScreen> {
     });
   }
 
+  void onTapTile(int i) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => DetailScreen(item: i),
+      ),
+    );
+  }
+
   List<Widget> _getTiles() {
     List<Widget> list = [];
     for (var i = 1; i < 21; i++) {
@@ -23,6 +32,7 @@ class _BusinessScreenState extends State<BusinessScreen> {
         leading: Icon(Icons.reply),
         title: Text('标题$i'),
         subtitle: Text('这是第$i个ListTile'),
+        onTap: () => onTapTile(i),
       ));
     }
     return list;
