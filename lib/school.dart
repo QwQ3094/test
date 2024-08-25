@@ -22,8 +22,18 @@ class _SchoolScreenState extends State<SchoolScreen> {
       _isChecked = checked!;
     });
   }
+  
+  void _showSnackBar(String text) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(text)
+      ),
+    );
+  }
 
-  void _showFieldDialog(BuildContext context) {
+  void _showFieldDialog(BuildContext context, void Function(String) onConfirm) {
+    final controller = TextEditingController();
+
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -34,6 +44,7 @@ class _SchoolScreenState extends State<SchoolScreen> {
               border: OutlineInputBorder(),
               labelText: 'Text',
             ),
+            controller: controller,
           ),
           actions: <Widget>[
             TextButton(
@@ -44,6 +55,7 @@ class _SchoolScreenState extends State<SchoolScreen> {
             ),
             FilledButton(
               onPressed: () {
+                onConfirm(controller.text);
                 Navigator.of(context).pop();
               },
               child: Text("Sure"),
@@ -118,7 +130,12 @@ class _SchoolScreenState extends State<SchoolScreen> {
               FilledButton(
                 child: const Text('dialog'),
                 onPressed: () {
-                  _showFieldDialog(context);
+                  _showFieldDialog(
+                    context,
+                    (text) {
+                      _showSnackBar(text);
+                    },
+                  );
                 }
               ),
             ],
