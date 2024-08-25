@@ -10,6 +10,8 @@ class SchoolScreen extends StatefulWidget {
 class _SchoolScreenState extends State<SchoolScreen> {
   String _select = 'male';
   bool _isChecked = false;
+  final List<String> data = ['语文', '数学', '英语', '物理', '化学', '生物', '地理'];
+  late String _dropdownValue = data.first;
 
   void _selectRadio(String? value) {
     setState(() {
@@ -66,10 +68,21 @@ class _SchoolScreenState extends State<SchoolScreen> {
     );
   }
 
+  void _onSelect(String? value) {
+    setState(() {
+      _dropdownValue = value!;
+    });
+  }
+
+  List<DropdownMenuEntry<String>> _buildMenuList(List<String> data) {
+    return data.map((String value) {
+      return DropdownMenuEntry<String>(value: value, label: value);
+    }).toList();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return ListView(
       children: [
         Padding(
           padding: const EdgeInsets.fromLTRB(15, 15, 15, 8),
@@ -103,8 +116,8 @@ class _SchoolScreenState extends State<SchoolScreen> {
 
         ListTile(
           leading: Checkbox(
-            value: _isChecked,
-            onChanged: _toggleChecked,
+             value: _isChecked,
+             onChanged: _toggleChecked,
           ),
           title: const Text('test'),
         ),
@@ -116,7 +129,7 @@ class _SchoolScreenState extends State<SchoolScreen> {
             children: [
               const Text('Text field'),
 
-              SizedBox(height: 15),
+              const SizedBox(height: 15),
 
               TextField(
                 decoration: InputDecoration(
@@ -125,7 +138,7 @@ class _SchoolScreenState extends State<SchoolScreen> {
                 ),
               ),
 
-              SizedBox(height: 15),
+              const SizedBox(height: 15),
 
               FilledButton(
                 child: const Text('dialog'),
@@ -138,6 +151,17 @@ class _SchoolScreenState extends State<SchoolScreen> {
                   );
                 }
               ),
+
+              const SizedBox(height: 15),
+
+              DropdownMenu<String>(
+                menuHeight: 200,
+                initialSelection: data.first,
+                onSelected: _onSelect,
+                dropdownMenuEntries: _buildMenuList(data),
+              ),
+              const SizedBox(height: 8),
+              Text('你选择的学科是: $_dropdownValue')
             ],
           ),
         ),

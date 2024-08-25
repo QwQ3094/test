@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'navigation.dart';
+import 'settings.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -30,19 +30,19 @@ class _HomeScreenState extends State<HomeScreen> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: Text("Flutter"),
-          content: Text("Welcome to flutter development!!"),
+          content: Text("欢迎来到Flutter开发，yeah!!!!"),
           actions: <Widget>[
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text("Cancel"),
+              child: Text("取消"),
             ),
             FilledButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text("Sure"),
+              child: Text("确定"),
             ),
           ],
         );
@@ -57,7 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text('You have pressed the button this many times:'),
+            const Text('你按下按钮这些次了:'),
             Text(
               '$_counter',
               style: Theme.of(context).textTheme.headlineMedium,
@@ -94,11 +94,11 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             const SizedBox(height: 10),
             FilledButton(
-              child: const Text('navigation'),
+              child: const Text('settings'),
               onPressed: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => const NavigationScreen(),
+                    builder: (context) => const SettingScreen(),
                   ),
                 );
               },
