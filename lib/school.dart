@@ -116,8 +116,8 @@ class _SchoolScreenState extends State<SchoolScreen> {
 
         ListTile(
           leading: Checkbox(
-             value: _isChecked,
-             onChanged: _toggleChecked,
+            value: _isChecked,
+            onChanged: _toggleChecked,
           ),
           title: const Text('test'),
         ),
