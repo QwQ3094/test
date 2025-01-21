@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 class DetailScreen extends StatelessWidget {
   final int item;
-  final int a;
 
   const DetailScreen({super.key, required this.item});
 
